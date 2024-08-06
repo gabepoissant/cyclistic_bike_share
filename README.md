@@ -67,37 +67,25 @@ SELECT * FROM '202305_divvy_tripdata';`
 
 Now, I check to see if it worked – it did:
 
-1
-SELECT * FROM all_trips;
+`SELECT * FROM all_trips;`
+
 Next, I check the total number of rows in the dataset:
 
-1
-SELECT COUNT(*) FROM all_trips;
+`SELECT COUNT(*) FROM all_trips;`
+
 There are 5,829,030 rows of data.
 
-Processing the Data
+## Processing the Data
 First, I will check the data for any duplicate entries
 
-1
-2
+```
 SELECT COUNT(ride_id) - COUNT(DISTINCT ride_id) AS duplicates
 FROM all_trips;
+```
+
 Finding no duplicates, I check each column for any empty cells:
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
+```
 -- To detect empty cells:
 SELECT COUNT(*) FROM all_trips WHERE ride_id == '';             -- 0
 SELECT COUNT(*) FROM all_trips WHERE rideable_type == '';       -- 0
@@ -112,44 +100,37 @@ SELECT COUNT(*) FROM all_trips WHERE start_lng == '';           -- 0
 SELECT COUNT(*) FROM all_trips WHERE end_lat == '';             -- 5,961 empty cells detected
 SELECT COUNT(*) FROM all_trips WHERE end_lng == '';             -- 5,961 empty cells detected
 SELECT COUNT(*) FROM all_trips WHERE member_casual == '';       -- 0
+```
+
 Finding nearly 1M empty cells, I will be sure to filter them.
 
 But first, I’ll check the length of each ride_id to verify consistency and accuracy:
 
-1
-SELECT DISTINCT(LENGTH(ride_id)) FROM all_trips;
+`SELECT DISTINCT(LENGTH(ride_id)) FROM all_trips;`
+
 All ride_id values are 16 characters long without exception.
 
 Next, I will check how many different values for member_casual there are, ensuring there are no invalid entries.
 
-1
-SELECT DISTINCT(member_casual) FROM all_trips;
+`SELECT DISTINCT(member_casual) FROM all_trips;`
+
 Finding no typos here, I will do the same for rideable_type.
 
-1
-SELECT DISTINCT(rideable_type) FROM all_trips;
+`SELECT DISTINCT(rideable_type) FROM all_trips;`
+
 Next, I will be creating a new column which provides a ride_length for each entry:
 
-1
-2
-3
-4
-5
+```
 SELECT
     started_at,
     ended_at,
     ROUND(((JULIANDAY(ended_at) - JULIANDAY(started_at)) * 1440), 2) AS ride_length
 FROM all_trips;
+```
+
 After creating the ride_length column, I can check for any ride lengths that may be invalid:
 
-1
-2
-3
-4
-5
-6
-7
-8
+```
 SELECT COUNT(ride_length)
 FROM
     (SELECT
@@ -158,50 +139,20 @@ FROM
         ROUND(((JULIANDAY(ended_at) - JULIANDAY(started_at)) * 1440), 2) AS ride_length
     FROM all_trips)
 WHERE ride_length < 0 OR ride_length > 1440;
+```
+
 I have detected 5,397 entries with a ride length of less than 0 or greater than 24hrs. These will be filtered out in the next step.
 
-Data Cleaning
+## Data Cleaning
 Taking what we have learned in the previous stage, I will be creating a new table that filters out inaccurate or incomplete data, and calling it cleaned_trips. This table will also include new columns: ride_length, weekday, month, and start_hour.
 
 First, I will clear any previous attempts at creating this new table:
 
-1
-DROP TABLE IF EXISTS cleaned_trips;
+`DROP TABLE IF EXISTS cleaned_trips;`
+
 Next, creating the new table:
 
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
+```
 CREATE TABLE IF NOT EXISTS cleaned_trips AS
     SELECT *,
         ROUND(((JULIANDAY(ended_at) - JULIANDAY(started_at)) * 1440), 2) AS ride_length,
@@ -235,134 +186,119 @@ CREATE TABLE IF NOT EXISTS cleaned_trips AS
         AND end_station_id <> ''
         AND end_lat <> ''
         AND end_lng <> '';
+```
+
 This new table has 4,494,681 rows, meaning 1,334,349 entries have been removed before analysis.
 
-Data Analysis
+## Data Analysis
 Before diving deep into the data, I will create a few tables that show the dataset at a glance.
 
 First, a table that shows the breakdown of users:
 
-1
-2
-3
+```
 SELECT member_casual, COUNT(member_casual) AS total_trips
 FROM cleaned_trips
 GROUP BY member_casual;
+```
+
 Next, a table that shows the breakdown of bike types being used by each user type:
 
-1
-2
-3
+```
 SELECT rideable_type, member_casual, COUNT(rideable_type) AS total_rides
 FROM cleaned_trips
 GROUP BY member_casual, rideable_type;
+```
+
 A table showing the average ride length of each user type:
 
-1
-2
-3
+```
 SELECT member_casual, AVG(ride_length) AS average_ride_length
 FROM cleaned_trips
 GROUP BY member_casual;
+```
+
 Now, I will be taking a look at when both user groups use Cyclistic bikes, starting by breaking it down by hour:
 
-1
-2
-3
+```
 SELECT member_casual, start_hour, COUNT(start_hour) AS total_rides
 FROM cleaned_trips
 GROUP BY member_casual, start_hour;
+```
+
 Now, breaking down ridership by weekday for both groups:
 
-1
-2
-3
-4
+```
 SELECT member_casual, month, COUNT(month) AS total_rides
 FROM cleaned_trips
 GROUP BY month, member_casual
 ORDER BY member_casual, started_at;
+```
+
 Finally, showing when rides are taken by month:
 
-1
-2
-3
-4
+```
 SELECT member_casual, month, COUNT(month) AS total_rides
 FROM cleaned_trips
 GROUP BY month, member_casual
 ORDER BY member_casual, started_at;
+```
+
 Now that we know how ridership differs over time, we will take a look at how long each user type uses a bike, on average.
 
 First, checking hourly breakdown of ride length:
 
-1
-2
-3
-4
+```
 SELECT member_casual, start_hour, AVG(ride_length) AS average_ride_length
 FROM cleaned_trips
 GROUP BY start_hour, member_casual
 ORDER BY member_casual, start_hour;
+```
+
 Next, average ride length by weekday:
 
-1
-2
-3
-4
+```
 SELECT member_casual, weekday, AVG(ride_length) AS average_ride_length
 FROM cleaned_trips
 GROUP BY weekday, member_casual
 ORDER BY member_casual, started_at;
+```
+
 And now, average ride length by month:
 
-1
-2
-3
-4
+```
 SELECT member_casual, month, AVG(ride_length) AS average_ride_lenth
 FROM cleaned_trips
 GROUP BY month, member_casual
 ORDER BY member_casual, started_at;
+```
+
 Now that we have looked at when rides are taken and for how long, we will take a look at where.
 
 I’ll create a top ten list for the most popular starting stations, first for members:
 
-1
-2
-3
-4
-5
-6
+```
 SELECT start_station_name, COUNT(ride_id) AS start_station_total
 FROM cleaned_trips
 WHERE member_casual = 'member'
 GROUP BY start_station_name
 ORDER BY start_station_total DESC
 LIMIT 10;
+```
+
 Then, for casual riders:
 
-1
-2
-3
-4
-5
-6
+```
 SELECT start_station_name, COUNT(ride_id) AS start_station_total
 FROM cleaned_trips
 WHERE member_casual = 'casual'
 GROUP BY start_station_name
 ORDER BY start_station_total DESC
 LIMIT 10;
+```
+
 Now, I will create a table that pairs each of the starting locations by name, and assigning them to a latitude and longitude. This is done by averaging latitude and longitudinal values, establishing the coordinates of each individual station.
 
-1
-2
-3
-4
-5
-6
-7
+```
 SELECT start_station_name, member_casual,
   AVG(start_lat) AS start_lat,
   AVG(start_lng) AS start_lng,
@@ -370,21 +306,24 @@ SELECT start_station_name, member_casual,
 FROM cleaned_trips
 GROUP BY start_station_name, member_casual
 ORDER BY member_casual, total_trips DESC;
+```
+
 Now that we’ve gained some important insights on our data, it’s time to create visuals and insights on everything we’ve learned so far.
 
-Data Visualized
+## Data Visualized
 
-Key Findings
-We see a significant influx of member rides at 8 am and 5 pm, indicating that members tend to rely on Cyclistic bikes for their daily commute.
-In contrast, casual riders are most active on weekends, suggesting that casual riders tend to use the service for leisure.
+## Key Findings
+- We see a significant influx of member rides at 8 am and 5 pm, indicating that members tend to rely on Cyclistic bikes for their daily commute.
+- In contrast, casual riders are most active on weekends, suggesting that casual riders tend to use the service for leisure.
 On average, casual users’ average ride length is close to double that of members, supporting the hypothesis that casual riders’ routes are more meandering, slower, or less purpose-driven compared to members, who are likely commuting.
-Casual riders predominantly start their rides near Chicago’s center of tourism, whereas members exhibit a more diverse starting location preference, which tends to be farther away from the city center. This finding further strengthens the distinction between commuters and sight-seers among the two user types.
-Recommendations
+- Casual riders predominantly start their rides near Chicago’s center of tourism, whereas members exhibit a more diverse starting location preference, which tends to be farther away from the city center. This finding further strengthens the distinction between commuters and sight-seers among the two user types.
+
+## Recommendations
 Based on the findings listed above, there is a fundamental difference in the purpose of rides taken by both user groups. These purposes must be taken into account when developing marketing campaigns to convert casual riders into members.
 
-Develop a new “Weekend Pass” product. This could be a new membership type that caters to the casual riders’ existing habits of riding on the weekends. This creates a middle ground for prospective members and will generate recurring revenue from the casual rider group.
-Develop marketing materials that focus on the potential for commuting. Casual riders may not have ever considered using the bikes for anything other than leisure, and advertisements highlighting this possibility could make the difference.
-In order to target the casual rider, we can use the data to determine when and where to reach them:
-Between the months of March and October, when Cyclistic is used the most.
-During the weekends, when casual riders are most active.
-Near Streeter Dr & Grand Ave, by far the most popular station used by casual riders.
+- Develop a new “Weekend Pass” product. This could be a new membership type that caters to the casual riders’ existing habits of riding on the weekends. This creates a middle ground for prospective members and will generate recurring revenue from the casual rider group.
+- Develop marketing materials that focus on the potential for commuting. Casual riders may not have ever considered using the bikes for anything other than leisure, and advertisements highlighting this possibility could make the difference.
+- In order to target the casual rider, we can use the data to determine when and where to reach them:
+    - Between the months of March and October, when Cyclistic is used the most.
+    - During the weekends, when casual riders are most active.
+    - Near Streeter Dr & Grand Ave, by far the most popular station used by casual riders.
