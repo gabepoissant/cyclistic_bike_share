@@ -6,7 +6,7 @@ I was tasked with developing 12 months of real-world urban bike-sharing data int
 - Date Completed: July 2023
 
 ## Scenario
-You are a junior data analyst working in the marketing analyst team at Cyclistic, a bike-share company in Chicago. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. Therefore, your team wants to understand how casual riders and annual members use Cyclistic bikes differently. From these insights, your team will design a new marketing strategy to convert casual riders into annual members. But first, Cyclistic executives must approve your recommendations, so they must be backed up with compelling data insights and professional data visualizations.
+You are a data analyst working in the marketing analyst team at Cyclistic, a bike-share company in Chicago. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. Therefore, **your team wants to understand how casual riders and annual members use Cyclistic bikes differently**. From these insights, your team will design a new marketing strategy to convert casual riders into annual members. But first, Cyclistic executives must approve your recommendations, so they must be backed up with **compelling data insights and professional data visualizations**.
 
 ## The Business Task
 Identify how casual riders and annual members use Cyclistic bikes differently.
@@ -14,7 +14,7 @@ Identify how casual riders and annual members use Cyclistic bikes differently.
 ## The Data
 The data consists of 12 months of real world data, anonymized and made publicly available here. The data is first party and collected automatically by Chicago-based bike-sharing company named Divvy.
 
-Columns:
+**Columns**:
 
 - ride_id
 - rideable_type
@@ -312,18 +312,20 @@ Now that we’ve gained some important insights on our data, it’s time to crea
 
 ## Data Visualized
 
+<div class='tableauPlaceholder' id='viz1722966271418' style='position: relative'><noscript><a href='#'><img alt='Cyclistic User Analysis ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Cy&#47;CyclisticAnalysisWorkbook_2&#47;CyclisticUserAnalysis&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='CyclisticAnalysisWorkbook_2&#47;CyclisticUserAnalysis' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Cy&#47;CyclisticAnalysisWorkbook_2&#47;CyclisticUserAnalysis&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='en-US' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1722966271418');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='1000px';vizElement.style.height='902px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+
 ## Key Findings
-- We see a significant influx of member rides at 8 am and 5 pm, indicating that members tend to rely on Cyclistic bikes for their daily commute.
-- In contrast, casual riders are most active on weekends, suggesting that casual riders tend to use the service for leisure.
-On average, casual users’ average ride length is close to double that of members, supporting the hypothesis that casual riders’ routes are more meandering, slower, or less purpose-driven compared to members, who are likely commuting.
-- Casual riders predominantly start their rides near Chicago’s center of tourism, whereas members exhibit a more diverse starting location preference, which tends to be farther away from the city center. This finding further strengthens the distinction between commuters and sight-seers among the two user types.
+- We see a significant influx of member rides at 8 am and 5 pm, indicating that **members tend to rely on Cyclistic bikes for their daily commute**.
+- In contrast, casual riders are most active on weekends, suggesting that **casual riders tend to use the service for leisure**.
+- **On average** casual users’ average ride length is close to double that of members, supporting the hypothesis that **casual riders’ routes are more meandering, slower, or less purpose-driven compared to members, who are likely commuting**.
+- **Casual riders predominantly start their rides near Chicago’s center of tourism, whereas members exhibit a more diverse starting location preference**, which tends to be farther away from the city center. This finding further strengthens the distinction between commuters and sight-seers among the two user types.
 
 ## Recommendations
 Based on the findings listed above, there is a fundamental difference in the purpose of rides taken by both user groups. These purposes must be taken into account when developing marketing campaigns to convert casual riders into members.
 
-- Develop a new “Weekend Pass” product. This could be a new membership type that caters to the casual riders’ existing habits of riding on the weekends. This creates a middle ground for prospective members and will generate recurring revenue from the casual rider group.
-- Develop marketing materials that focus on the potential for commuting. Casual riders may not have ever considered using the bikes for anything other than leisure, and advertisements highlighting this possibility could make the difference.
+- Develop a new “Weekend Pass” product. This could be **a new membership type that caters to the casual riders’ existing habits of riding on the weekends**. This creates a middle ground for prospective members and will generate recurring revenue from the casual rider group.
+- **Develop marketing materials that focus on the potential for commuting**. Casual riders may not have ever considered using the bikes for anything other than leisure, and advertisements highlighting this possibility could make the difference.
 - In order to target the casual rider, we can use the data to determine when and where to reach them:
-    - Between the months of March and October, when Cyclistic is used the most.
-    - During the weekends, when casual riders are most active.
-    - Near Streeter Dr & Grand Ave, by far the most popular station used by casual riders.
+    - **Between the months of March and October**, when Cyclistic is used the most.
+    - **During the weekends**, when casual riders are most active.
+    - **Near Streeter Dr & Grand Ave**, by far the most popular station used by casual riders.
