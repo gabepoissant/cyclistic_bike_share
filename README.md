@@ -5,6 +5,8 @@ I was tasked with developing 12 months of real-world urban bike-sharing data int
 - Role: Data Analyst
 - Date Completed: July 2023
 
+[See my interactive vizualization here!](https://public.tableau.com/views/CyclisticAnalysisWorkbook_2/CyclisticUserAnalysis?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link  )
+
 ## Scenario
 You are a data analyst working in the marketing analyst team at Cyclistic, a bike-share company in Chicago. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. Therefore, **your team wants to understand how casual riders and annual members use Cyclistic bikes differently**. From these insights, your team will design a new marketing strategy to convert casual riders into annual members. But first, Cyclistic executives must approve your recommendations, so they must be backed up with **compelling data insights and professional data visualizations**.
 
@@ -312,7 +314,8 @@ Now that we’ve gained some important insights on our data, it’s time to crea
 
 ## Data Visualized
 
-https://public.tableau.com/views/CyclisticAnalysisWorkbook_2/CyclisticUserAnalysis?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link             
+[See my interactive vizualization here](https://public.tableau.com/views/CyclisticAnalysisWorkbook_2/CyclisticUserAnalysis?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link  )
+        
 
 ## Key Findings
 - We see a significant influx of member rides at 8 am and 5 pm, indicating that **members tend to rely on Cyclistic bikes for their daily commute**.
