@@ -1,0 +1,9 @@
+Unfortunately due to GitHub's size limit of 100MB, I am forced to omit the following files:
+
+202205-divvy-tripdata.csv
+202206-divvy-tripdata.csv
+202207-divvy-tripdata.csv
+202208-divvy-tripdata.csv
+202209-divvy-publictripdata.csv
+202210-divvy-tripdata.csv
+cleaned_trips_202306281313.csv

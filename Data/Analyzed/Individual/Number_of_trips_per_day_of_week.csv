@@ -1,0 +1,15 @@
+"member_casual","weekday","COUNT(weekday)"
+casual,Friday,258175
+casual,Monday,194974
+casual,Saturday,350970
+casual,Sunday,289572
+casual,Thursday,233766
+casual,Tuesday,202337
+casual,Wednesday,218113
+member,Friday,387064
+member,Monday,374374
+member,Saturday,343725
+member,Sunday,303839
+member,Thursday,442117
+member,Tuesday,438809
+member,Wednesday,456846
