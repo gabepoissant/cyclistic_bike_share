@@ -315,7 +315,11 @@ Now that we’ve gained some important insights on our data, it’s time to crea
 ## Data Visualized
 
 [See my interactive vizualization here](https://public.tableau.com/views/CyclisticAnalysisWorkbook_2/CyclisticUserAnalysis?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link  )
-        
+
+![viz1](https://github.com/gabepoissant/cyclistic_bike_share/blob/main/visualization/viz1.png)
+![viz2](https://github.com/gabepoissant/cyclistic_bike_share/blob/main/visualization/viz2.png)
+![viz3](https://github.com/gabepoissant/cyclistic_bike_share/blob/main/visualization/viz3.png)
+![viz4](https://github.com/gabepoissant/cyclistic_bike_share/blob/main/visualization/viz4.png)
 
 ## Key Findings
 - We see a significant influx of member rides at 8 am and 5 pm, indicating that **members tend to rely on Cyclistic bikes for their daily commute**.
