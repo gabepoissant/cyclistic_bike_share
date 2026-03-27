@@ -1,3 +1,5 @@
+![viz3](https://github.com/gabepoissant/cyclistic_bike_share/blob/main/visualization/viz3.png)
+
 [See my interactive vizualization here!](https://public.tableau.com/views/CyclisticAnalysisWorkbook_2/CyclisticUserAnalysis?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 
 I was tasked with developing 12 months of real-world urban bike-sharing data (5.8 million rows) into actionable insights for a fictional company called Cyclistic.
