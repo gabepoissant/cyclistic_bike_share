@@ -1,11 +1,11 @@
-I was tasked with developing 12 months of real-world urban bike-sharing data into actionable insights for a fictional company called Cyclistic.
+[See my interactive vizualization here!](https://public.tableau.com/views/CyclisticAnalysisWorkbook_2/CyclisticUserAnalysis?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
+
+I was tasked with developing 12 months of real-world urban bike-sharing data (5.8 million rows) into actionable insights for a fictional company called Cyclistic.
 
 - Technology: SQL, Tableau
 - Timeline: 1 week
 - Role: Data Analyst
 - Date Completed: July 2023
-
-[See my interactive vizualization here!](https://public.tableau.com/views/CyclisticAnalysisWorkbook_2/CyclisticUserAnalysis?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link  )
 
 ## Scenario
 You are a data analyst working in the marketing analyst team at Cyclistic, a bike-share company in Chicago. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. Therefore, **your team wants to understand how casual riders and annual members use Cyclistic bikes differently**. From these insights, your team will design a new marketing strategy to convert casual riders into annual members. But first, Cyclistic executives must approve your recommendations, so they must be backed up with **compelling data insights and professional data visualizations**.
@@ -14,7 +14,7 @@ You are a data analyst working in the marketing analyst team at Cyclistic, a bik
 Identify how casual riders and annual members use Cyclistic bikes differently.
 
 ## The Data
-The data consists of 12 months of real world data, anonymized and made publicly available here. The data is first party and collected automatically by Chicago-based bike-sharing company named Divvy.
+Data Source: This analysis uses 12 months of anonymized, first-party trip data (June 2022 – May 2023) provided by Divvy. The full raw dataset and monthly CSV files are made publicly available by the City of Chicago and can be accessed [here](https://divvy-tripdata.s3.amazonaws.com/index.html).
 
 **Columns**:
 
@@ -192,6 +192,13 @@ CREATE TABLE IF NOT EXISTS cleaned_trips AS
 
 This new table has 4,494,681 rows, meaning 1,334,349 entries have been removed before analysis.
 
+## Data Engineering Workflow
+To ensure accuracy across nearly 6 million records, I implemented a multi-stage ETL (Extract, Transform, Load) process:
+
+- Data Consolidation: Used UNION ALL to aggregate 12 separate CSV files into a unified relational table for analysis.
+- Data Cleaning: Conducted a comprehensive audit for null values and duplicates. I removed approximately 1.3M incomplete entries to ensure high-confidence reporting.
+- Feature Engineering: Created time-series variables (ride_length, weekday, start_hour) using SQL date functions to transform raw timestamps into usable dates.
+
 ## Data Analysis
 Before diving deep into the data, I will create a few tables that show the dataset at a glance.
 
@@ -336,3 +343,5 @@ Based on the findings listed above, there is a fundamental difference in the pur
     - **Between the months of March and October**, when Cyclistic is used the most.
     - **During the weekends**, when casual riders are most active.
     - **Near Streeter Dr & Grand Ave**, by far the most popular station used by casual riders.
+
+    [See my interactive vizualization here!](https://public.tableau.com/views/CyclisticAnalysisWorkbook_2/CyclisticUserAnalysis?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link  )
