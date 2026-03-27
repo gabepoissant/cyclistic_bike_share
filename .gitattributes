@@ -1,2 +1,9 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Force SQL files to be the primary detected language
+*.sql linguist-detectable
+*.sql linguist-documentation=false
+
+data/* linguist-documentation
+visualization/* linguist-documentation
