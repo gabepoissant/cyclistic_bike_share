@@ -349,8 +349,6 @@ Based on the findings listed above, there is a fundamental difference in the pur
     - **During the weekends**, when casual riders are most active.
     - **Near Streeter Dr & Grand Ave**, by far the most popular station used by casual riders.
 
-    [See my interactive vizualization here!](https://public.tableau.com/views/CyclisticAnalysisWorkbook_2/CyclisticUserAnalysis?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link  )
-
 ---
 
 [See my interactive vizualization here](https://public.tableau.com/views/CyclisticAnalysisWorkbook_2/CyclisticUserAnalysis?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
